@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AaAFP2.AddDbEntityViewModel&lt;Type&gt;">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View model classes\AddDbEntityViewModel1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.BaseViewModel" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASAggAAAABAAAEAAAAAAARgAAQAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>View model classes\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.DbEntityViewModel">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACIAAQAAAACAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>View model classes\DbEntityViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.MainViewModel" Collapsed="true">
+    <Position X="13.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYCAAECAAIADhYgAogChBBgAwBFAAGQBCIBACgAgAUA=</HashCode>
+      <FileName>View model classes\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AaAFP2.FixedCostsViewModel">
+    <Position X="8.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAABCAAAAAAAAAAAQAAAAAABAAA=</HashCode>
+      <FileName>View model classes\FixedCostViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.EmployeeViewModel">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACACAAAAAAAAIgAAAAIAAACAAAAAAATAAABAAAAAA=</HashCode>
+      <FileName>View model classes\EmployeeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.EditDbEntityViewModel1&lt;Type&gt;">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View model classes\EditDbEntityViewModel1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.DialogService">
+    <Position X="6.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKgAQAAgAAAAAAAAAAACAAAAAAAAIAAAAAAAABA=</HashCode>
+      <FileName>View model classes\DialogService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.PointsRwpViewModel">
+    <Position X="10" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAAAAAAA=</HashCode>
+      <FileName>View model classes\PointsRwpViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.RecomendationViewModel">
+    <Position X="13.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAABAAAAAAgAAAAAAAQAQAAAAAAAAQA=</HashCode>
+      <FileName>View model classes\RecomendationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.RelayCommand" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View model classes\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AaAFP2.ReportsViewModel">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACiIAEBAAAAAAAAAgAAABgAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>View model classes\ReportsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AaAFP2.StatusEnterpriseViewModel">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAAAAAAAAAAAACgAAgAAAQAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>View model classes\StatusEnterpriseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.DbEntityViewModel&lt;Type&gt;">
+    <Position X="9.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACIAAQgAAACAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>View model classes\DbEntityViewModelGeneric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

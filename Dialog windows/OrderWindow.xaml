@@ -1,0 +1,50 @@
+﻿<mah:MetroWindow  x:Class="AaAFP2.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+        mc:Ignorable="d"
+        Title="заказ" WindowStartupLocation="CenterScreen" Style="{StaticResource DialogWindowStyle}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.DataContext>
+        <local:DbEntityViewModel>
+            <local:DbEntityViewModel.CurrentDbEntity>
+                <local:Order/>
+            </local:DbEntityViewModel.CurrentDbEntity>
+        </local:DbEntityViewModel>
+    </Window.DataContext>
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel>
+            <Label>Клиент:</Label>
+            <local:DataTablePicker x:Name="idClient" TitleWindow="Таблица клиентов" IdRow="{Binding CurrentDbEntity.IdClient, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Clients.Local}"></local:DataTablePicker>
+        </StackPanel>
+        <StackPanel>
+            <Label>Статус заказа:</Label>
+            <ComboBox x:Name="cbStatusOrder" SelectedIndex="0"  DisplayMemberPath="Title" SelectedValuePath="ID" ItemsSource="{Binding DbEntities.StatusOrders.Local}">
+                <ComboBox.SelectedValue>
+                    <Binding Path="CurrentDbEntity.IdStatusOrder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" FallbackValue="1" TargetNullValue="1">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedValue>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel>
+            <Label>Комментарий:</Label>
+            <TextBox Text="{Binding CurrentDbEntity.Comment, Mode=TwoWay}"></TextBox>
+        </StackPanel>
+        <StackPanel>
+            <Button Style="{StaticResource AddOrUpdateButtonStyle}"></Button>
+        </StackPanel>
+    </StackPanel>
+</mah:MetroWindow>

@@ -1,0 +1,96 @@
+﻿<mah:MetroWindow x:Class="AaAFP2.ContractWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:AaAFP2"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="договор" Style="{StaticResource DialogWindowStyle}" WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <local:ContractViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label>Номер заказа:</Label>
+            <local:DataTablePicker x:Name="tablePickerOrderId" TitleWindow="Таблица заказов" IdRow="{Binding IdOrder, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Orders.Local}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0">
+            <Label>Цена:</Label>
+            <xctk:DecimalUpDown x:Name="udPrice" Style="{StaticResource DialogInputControlStyle}" Margin="0" Value="{Binding CurrentDbEntity.Price, Mode=TwoWay}"/>
+            <StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label HorizontalAlignment="Left">Себестоимость заказа:</Label>
+                <Label HorizontalAlignment="Left">
+                    <Label.Content>
+                        <TextBlock x:Name="tbOrderPrimeCost" Text="{Binding OrderPrimeCost, StringFormat=C, ConverterCulture=ru-RU}"/>
+                    </Label.Content>
+                </Label>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Label>Предоплата:</Label>
+            <xctk:DecimalUpDown x:Name="udPrepayment" Minimum="0" Style="{StaticResource DialogInputControlStyle}" Value="{Binding CurrentDbEntity.Prepayment, Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label>Название проекта:</Label>
+            <TextBox x:Name="tbNameProject">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.ProjectTitle" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0" VerticalAlignment="Top">
+            <Label>Дата подписания:</Label>
+            <DatePicker x:Name="date" Margin="0">
+                <DatePicker.SelectedDate>
+                    <Binding Path="CurrentDbEntity.DateSigning" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule TextError="Поле должно быть заполнено. Введите дату"></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Label>Дней выполнения:</Label>
+            <xctk:IntegerUpDown x:Name="udDays" Minimum="0" Style="{StaticResource DialogInputControlStyle}" Value="{Binding CurrentDbEntity.ProductionDays, Mode=TwoWay}"></xctk:IntegerUpDown>
+        </StackPanel>
+        <Button Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource AddOrUpdateButtonStyle}" Margin="20,5,20,13" Width="auto">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                    <Binding ElementName="tablePickerOrderId" Path="IdRow.Length"/>
+                    <Binding ElementName="tbNameProject" Path="Text.Length"/>
+                    <Binding ElementName="udPrice" Path="Text.Length"/>
+                    <Binding ElementName="date" Path="Text.Length"/>
+                    <Binding ElementName="udPrepayment" Path="Text.Length"/>
+                    <Binding ElementName="udDays" Path="Text.Length"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+    </Grid>
+</mah:MetroWindow>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AaAFP2.DataModel">
+    <Position X="1.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQBAQAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Model classes\DataModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.Finance">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAIBAAAAAAAAAAAAAAABIAAAIAAAABAABAAA=</HashCode>
+      <FileName>Model classes\Finance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.FixedCostsModel">
+    <Position X="1.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Model classes\FixedCostsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.MaterialModel">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAIAAAAAAAAAgAAAQAAAAAAgAAAAIIAAABAAAgAAEA=</HashCode>
+      <FileName>Model classes\MaterialModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.ProductModel">
+    <Position X="3" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAEAAAQAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model classes\ProductModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.RecommendationModel">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACBAAAAIBAAAAAQAAAAAAIEAA=</HashCode>
+      <FileName>Model classes\RecommendationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.RecordMaterial">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model classes\RecordMaterial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AaAFP2.Reports">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAABAAAAAQAAABAAAAIgEBAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Model classes\Reports.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="AaAFP2.FinancialIndicators">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAACAAACAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Model classes\FinancialIndicators.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AaAFP2.TimePeriod">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAQAAAAAAAAAACAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model classes\TimePeriod.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,153 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="AaAFP2.MaterialsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Name="window"
+        Title="Материалы" Height="642.8" Width="650" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.DataContext>
+        <local:DbEntityViewModel></local:DbEntityViewModel>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="groupBoxTypesMaterials" Header="Типы материалов" Margin="5">
+            <GroupBox.DataContext>
+                <local:DbEntityViewModel>
+                    <local:DbEntityViewModel.CurrentDbEntity>
+                        <local:TypeMaterial></local:TypeMaterial>
+                    </local:DbEntityViewModel.CurrentDbEntity>
+                </local:DbEntityViewModel>
+            </GroupBox.DataContext>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="2.7*"></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,0,10,5">
+                    <Label>Название:</Label>
+                    <TextBox x:Name="tbName" Height="29">
+                        <TextBox.Text>
+                            <Binding Path="CurrentDbEntity.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:RequiredFieldValidationRule TextError="Поле должно быть заполнено"></local:RequiredFieldValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,10,5">
+                    <Label>Единица измерения:</Label>
+                    <ComboBox SelectedIndex="0" DisplayMemberPath="FullTitle" SelectedValuePath="ID" SelectedValue="{Binding Path=CurrentDbEntity.IdUnitMeasure, Mode=TwoWay}" ItemsSource="{Binding Path=DbEntities.UnitsMeasures.Local}" Width="Auto" Height="29"/>
+                </StackPanel>
+                <Button Style="{StaticResource ResourceKey=DialogWindowButtonStyle}" VerticalAlignment="Center" Margin="10, 16, 10, 0" Height="29" Grid.Column="2" Grid.Row="0" Command="{Binding AddCopyCurrentDbEntityCommand}" Content="Добавить">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                            <Binding ElementName="tbName" Path="Text.Length"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+                <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Margin="10, 5, 10, 5" ItemsSource="{Binding Path=DbEntities.TypesMaterials.Local}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name}"/>
+                        <DataGridTextColumn Header="Единица измерения" Width="*" Binding="{Binding Path=units_measures.FullTitle}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Удалить" Command="{Binding Path=RemoveDbEntityCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <Button Grid.Row="3" Grid.ColumnSpan="3" Margin="10, 0, 10, 0" Width="auto" Style="{StaticResource DialogWindowButtonStyle}" Command="{Binding SaveChangesInDbCommand}" Content="Сохранить изменения"></Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="База материалов" Margin="5">
+            <GroupBox.DataContext>
+                <local:DbEntityViewModel>
+                    <local:DbEntityViewModel.CurrentDbEntity>
+                        <local:Material></local:Material>
+                    </local:DbEntityViewModel.CurrentDbEntity>
+                </local:DbEntityViewModel>
+            </GroupBox.DataContext>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="2.7*"></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10, 0, 5, 0">
+                    <Label>Производитель:</Label>
+                    <TextBox Width="auto" x:Name="tbManufacturer">
+                        <TextBox.Text>
+                            <Binding Path="CurrentDbEntity.Manufacturer" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:RequiredFieldValidationRule TextError="Поле должно быть заполнено"></local:RequiredFieldValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="5, 0, 5, 0">
+                    <Label>Модель:</Label>
+                    <TextBox Width="auto" x:Name="tbModel">
+                        <TextBox.Text>
+                            <Binding Path="CurrentDbEntity.Model" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Margin="5, 0, 5, 0">
+                    <Label>Тип материала:</Label>
+                    <local:DataTablePicker Width="auto" TitleWindow="Таблица типов материалов" IdRow="{Binding CurrentDbEntity.IdTypeMaterials, Mode=TwoWay}" ItemsSource="{Binding DbEntities.TypesMaterials.Local}"></local:DataTablePicker>
+                </StackPanel>
+                <Button Width="auto" Style="{StaticResource ResourceKey=DialogWindowButtonStyle}" VerticalAlignment="Center" Margin="5, 16, 10, 0" Height="27" Grid.Column="3" Grid.Row="0" Command="{Binding Path=AddCopyCurrentDbEntityCommand}" Content="Добавить">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                            <Binding ElementName="tbManufacturer" Path="Text.Length"/>
+                            <Binding ElementName="tbModel" Path="Text.Length"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+                <DataGrid x:Name="DgTypesProducts" Grid.ColumnSpan="4" Grid.Row="1" Margin="10" ItemsSource="{Binding Path=DbEntities.Materials.Local}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Тип материала" Width="0.5*" Binding="{Binding Path=types_materials.Name}"/>
+                        <DataGridTextColumn Header="Производитель" Width="*" Binding="{Binding Path=Manufacturer}"/>
+                        <DataGridTextColumn Header="Модель" Width="*" Binding="{Binding Path=Model}"/>
+                        <DataGridTextColumn Header="Единица измерения" Width="0.5*" Binding="{Binding Path=types_materials.units_measures.ShortTitle}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Удалить" Command="{Binding Path=RemoveDbEntityCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <Button Grid.Row="3" Grid.ColumnSpan="4" Margin="10, 0, 10, 0" Width="auto" Style="{StaticResource DialogWindowButtonStyle}" Command="{Binding SaveChangesInDbCommand}" Content="Сохранить изменения"></Button>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</mah:MetroWindow>

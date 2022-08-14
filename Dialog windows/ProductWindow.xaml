@@ -1,0 +1,166 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="AaAFP2.ProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Title="изделие" WindowStartupLocation="CenterScreen" Style="{StaticResource DialogWindowStyle}">
+    <Window.Resources>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource MahApps.Styles.GroupBox}">
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ProductViewModel></local:ProductViewModel>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,5,15,5">
+                <Label>Название:</Label>
+                <TextBox x:Name="tbNameProduct" Width="120">
+                    <TextBox.Text>
+                        <Binding Path="CurrentDbEntity.Title" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="15,5,15,5">
+                <Label>Вид:</Label>
+                <ComboBox x:Name="cbTypeProduct" Width="120" SelectedIndex="0" DisplayMemberPath="Title" SelectedValuePath="ID" SelectedValue="{Binding CurrentDbEntity.IdTypeProduct, Mode=TwoWay, TargetNullValue=1, FallbackValue=1}" ItemsSource="{Binding DbEntities.TypesProducts.Local}"></ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Margin="15,5,10,5">
+                <Label>Заказ:</Label>
+                <local:DataTablePicker x:Name="dtIdOrder" Width="120" TitleWindow="Таблица заказов" IdRow="{Binding CurrentDbEntity.IdOrder, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Orders.Local}"></local:DataTablePicker>
+            </StackPanel>
+        </Grid>
+        <GroupBox Header="Материалы" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0">
+                    <StackPanel Margin="0">
+                        <Label>Материал:</Label>
+                        <local:DataTablePicker x:Name="dtIdMaterial" TitleWindow="Таблица материалов" IdRow="{Binding CurrentProductMaterial.IdMaterial, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Materials.Local}"></local:DataTablePicker>
+                    </StackPanel>
+                    <StackPanel Margin="0">
+                        <Label>Количество:</Label>
+                        <xctk:IntegerUpDown x:Name="udQuantityMaterial" Minimum="1" Value="{Binding CurrentProductMaterial.QuantityMaterial, Mode=TwoWay}" Style="{StaticResource DialogInputControlStyle}"></xctk:IntegerUpDown>
+                    </StackPanel>
+                    <StackPanel Margin="0">
+                        <Label>Цена (за 1 единицу):</Label>
+                        <xctk:DecimalUpDown x:Name="udUnitPrice" Minimum="1" Value="{Binding CurrentProductMaterial.UnitPrice, Mode=TwoWay}" Style="{StaticResource DialogInputControlStyle}"></xctk:DecimalUpDown>
+                    </StackPanel>
+                    <Button Style="{StaticResource DialogWindowButtonStyle}" Content="Добавить" Command="{Binding AddMaterialCommand}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                                <Binding ElementName="dtIdMaterial" Path="IdRow.Length"/>
+                                <Binding ElementName="udQuantityMaterial" Path="Text.Length"/>
+                                <Binding ElementName="udUnitPrice" Path="Text.Length"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0">
+                    <ListBox x:Name="lbMaterials" ItemsSource="{Binding Materials}" Height="168">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="1">
+                                    <TextBlock FontWeight="Bold"  Text="{Binding Path=material.types_materials.Name}" />
+                                    <StackPanel Orientation="Horizontal" Margin="0">
+                                        <TextBlock Text="Производитель: "></TextBlock>
+                                        <TextBlock Text="{Binding Path=material.Manufacturer}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0">
+                                        <TextBlock Text="Модель: "></TextBlock>
+                                        <TextBlock Text="{Binding Path=material.Model}" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0" Orientation="Horizontal">
+                                        <TextBlock Text="Количество: "></TextBlock>
+                                        <TextBlock Text="{Binding Path=QuantityMaterial}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0">
+                                        <TextBlock Text="Единицы измерения: "></TextBlock>
+                                        <TextBlock Text="{Binding Path=material.types_materials.units_measures.ShortTitle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Style="{StaticResource DialogWindowButtonStyle}" Command="{Binding RemoveMaterialCommand}" CommandParameter="{Binding ElementName=lbMaterials, Path=SelectedItem}">Удалить</Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Операции" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0">
+                    <StackPanel Margin="0">
+                        <Label>Операция:</Label>
+                        <local:DataTablePicker x:Name="dtIdOperation" TitleWindow="Таблица производственных операций" IdRow="{Binding CurrentOperationProduct.IdOperation, Mode=TwoWay}" ItemsSource="{Binding DbEntities.ManufacturingOperations.Local}"></local:DataTablePicker>
+                    </StackPanel>
+                    <StackPanel Margin="0">
+                        <Label>Количество:</Label>
+                        <xctk:IntegerUpDown x:Name="udQuantityOperations" Minimum="1" Value="{Binding CurrentOperationProduct.Quantity, Mode=TwoWay}" Style="{StaticResource DialogInputControlStyle}"></xctk:IntegerUpDown>
+                    </StackPanel>
+                    <Button Style="{StaticResource DialogWindowButtonStyle}" Content="Добавить" Command="{Binding AddOperationCommand}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                                <Binding ElementName="dtIdOperation" Path="IdRow.Length"/>
+                                <Binding ElementName="udQuantityOperations" Path="Text.Length"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0">
+                    <ListBox x:Name="lbOperations" ItemsSource="{Binding Operations}" Height="107" Margin="0, 5, 0, 0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="1">
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=manufacturing_operations.Name}" />
+                                    <StackPanel Margin="0" Orientation="Horizontal">
+                                        <TextBlock Text="Количество: "></TextBlock>
+                                        <TextBlock Text="{Binding Path=Quantity}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Style="{StaticResource DialogWindowButtonStyle}" Command="{Binding RemoveOperationCommand}" CommandParameter="{Binding ElementName=lbOperations, Path=SelectedItem}">Удалить</Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Row="3" Width="Auto" Margin="10, 5, 10, 10" Style="{StaticResource AddOrUpdateButtonStyle}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                    <Binding ElementName="tbNameProduct" Path="Text.Length"/>
+                    <Binding ElementName="dtIdOrder" Path="IdRow.Length"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+    </Grid>
+</mah:MetroWindow>

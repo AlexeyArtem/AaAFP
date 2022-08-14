@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a77dab759e94a33a5ba1ca0fa891e54" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="sql11508062Model.AccrualPointsRwp" Width="2" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.BonusSalary" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Client" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ConditionFinance" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ConditionManufacturing" Width="1.5" PointX="5.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ConditionOrdersAndEmployees" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ContractPayment" Width="1.5" PointX="15.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Contract" Width="1.5" PointX="13.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.CostCategory" Width="1.5" PointX="5.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.DeductionFromSalary" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Employee" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.EmployeePosition" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.EnterpriseInfo" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.FixedCost" Width="1.5" PointX="8" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ManufacturingOperation" Width="1.5" PointX="13.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Material" Width="1.5" PointX="16.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.MonthlyCost" Width="1.5" PointX="10.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.OperationProduct" Width="1.5" PointX="15.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Order" Width="1.5" PointX="11" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.OtherCost" Width="1.5" PointX="8" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.OtherRevenue" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.PackingList" Width="1.5" PointX="16.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.PaymentFixedCost" Width="1.5" PointX="10.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.PaymentSalaryPrepay" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Position" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Product" Width="1.5" PointX="13.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.ProductMaterial" Width="1.5" PointX="18.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.Recommendation" Width="1.5" PointX="8" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.RecordPackingList" Width="1.5" PointX="18.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.SalaryPayment" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.StatusOrder" Width="1.5" PointX="8.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.TypeMaterial" Width="1.5" PointX="14" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.TypeProduct" Width="1.5" PointX="11" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.UnitMeasure" Width="1.5" PointX="11.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.WeeklyCost" Width="1.5" PointX="10.25" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="sql11508062Model.WriteOffMaterial" Width="1.5" PointX="18.5" PointY="17" IsExpanded="true" />
+        <AssociationConnector Association="sql11508062Model.FK_FromAccrualPointsRWPToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromBonusSalaryToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromOrdersToClients" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromRecommendationsToConditionsFinance" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromRecommendateionsToConditionsManufacturing" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromRecommendationsToConditionsOrdersAndEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromContractPaymentToOrderContracts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromContractsToOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromFixedCostsToCostCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromOtherCostsToCostCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromDeductionsFromSalaryToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromEmployees_PositionsToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromPaymentsSalaryPrepayToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromSalaryPaymentsToEmployees" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromEmployees_PositionsToPositions" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromMontlyCostsToFixedCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromPaymentsFixedCostsToFixedCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromWeeklyCostsToFixedCosts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromOperationsProductsToManufacturingOperations" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromMaterialsToTypesMaterials" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromProductsMaterialsToMaterials" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromRecordPackingListToMaterials" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromWriteOffMaterialsToMaterials" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromOperationsProductsToProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromOrdersToStatusOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromProductsToOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromRecordPackingListToPackingList" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromProductsMaterialsToProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromProductsToTypesProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="sql11508062Model.FK_FromTypesMaterialsToUnitsMeasures" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sql11508062Model.Equipment" Width="1.5" PointX="10.375" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

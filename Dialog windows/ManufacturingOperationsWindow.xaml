@@ -1,0 +1,90 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="AaAFP2.ManufacturingOperationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Title="Производственные операции" WindowStartupLocation="CenterScreen" Width="630" Height="300" ResizeMode="CanMinimize">
+
+    <mah:MetroWindow.DataContext>
+        <local:DbEntityViewModel>
+            <local:DbEntityViewModel.CurrentDbEntity>
+                <local:ManufacturingOperation></local:ManufacturingOperation>
+            </local:DbEntityViewModel.CurrentDbEntity>
+        </local:DbEntityViewModel>
+    </mah:MetroWindow.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.Resources>
+        <Style BasedOn="{StaticResource ResourceKey=DataGridTabItem}" TargetType="DataGrid"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2.3*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="15,0,10,10">
+            <Label Height="32" Margin="34,0,33.2,0">Название:</Label>
+            <TextBox Height="25" x:Name="tbName" Style="{StaticResource DialogInputControlStyle}" Width="auto">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="15,0,10,10">
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="0,0,0.2,0">Ср. время выполнения операции:</TextBlock>
+            <xctk:TimeSpanUpDown x:Name="udTime" Width="auto" Height="25" Style="{StaticResource ResourceKey=DialogInputControlStyle}" Minimum="0" Value="{Binding CurrentDbEntity.ExecutionTime, Mode=TwoWay}"></xctk:TimeSpanUpDown>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Margin="15,0,10,10">
+            <Label Height="31" Margin="18,0,17.2,0">Дневная норма:</Label>
+            <xctk:IntegerUpDown Height="25" Width="auto" x:Name="udNorm" Style="{StaticResource ResourceKey=DialogInputControlStyle}" Minimum="1" Value="{Binding CurrentDbEntity.NormPerDay, Mode=TwoWay}"></xctk:IntegerUpDown>
+        </StackPanel>
+        <Button Width="auto" Height="25" Style="{StaticResource ResourceKey=DialogWindowButtonStyle}" Content="Добавить" VerticalAlignment="Bottom" Margin="10,0,10,13" Grid.Column="3" Grid.Row="0" Command="{Binding Path=AddCopyCurrentDbEntityCommand}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                    <Binding ElementName="tbName" Path="Text.Length"/>
+                    <Binding ElementName="udNorm" Path="Text.Length"/>
+                    <Binding ElementName="udTime" Path="Text.Length"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <DataGrid IsReadOnly="False" CanUserAddRows="False" Grid.ColumnSpan="4" Grid.Row="1" Margin="10, 10, 10, 0" Width="auto" ItemsSource="{Binding Path=DbEntities.ManufacturingOperations.Local}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name, Mode=TwoWay}"/>
+                <DataGridTextColumn Width="*" Header="Среднее время выполнения одной операции" Binding="{Binding Path=ExecutionTime, Mode=TwoWay}"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="*" Header ="Дневная норма">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <xctk:IntegerUpDown Minimum="1" Value="{Binding Path=NormPerDay, Mode=TwoWay}"></xctk:IntegerUpDown>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" Command="{Binding Path=RemoveDbEntityCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Button Grid.ColumnSpan="4" Grid.Row="3" Margin="10, 0, 10, 0" Width="auto" Style="{StaticResource SaveChangesButtonStyle}"></Button>
+    </Grid>
+</mah:MetroWindow>

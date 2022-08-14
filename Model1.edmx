@@ -1,0 +1,2235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sql11508062Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accrual_points_rwp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bonus_salaries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="decimal" Precision="11" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="conditions_finace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsPredictedProfitNegative" Type="tinyint" />
+          <Property Name="IsWorkingCapitalNotEnough" Type="tinyint" />
+          <Property Name="IsWorkingCapitalEnoughSalary" Type="tinyint" />
+          <Property Name="IsWokingCapitalEnoughMaterial" Type="tinyint" />
+          <Property Name="IsWorkingCapitalEnoughFixedCosts" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="conditions_manufacturing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductsProductionExceedsPredicted" Type="tinyint" />
+          <Property Name="PercentOperationsExceedNorm" Type="double" />
+        </EntityType>
+        <EntityType Name="conditions_orders_and_employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HasEmployeesManyPosition" Type="tinyint" />
+          <Property Name="HasCompletedOrdersUnpaid" Type="tinyint" />
+          <Property Name="HasIncompleteOrdersProductionTimeViolations" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="contract_payments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContract" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contracts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOrder" Type="int" Nullable="false" />
+          <Property Name="DateSigning" Type="date" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Prepayment" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ProductionDays" Type="int" Nullable="false" />
+          <Property Name="ProjectTitle" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cost_categories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="145" Nullable="false" />
+        </EntityType>
+        <EntityType Name="deductions_from_salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="Comment" Type="text" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SumSalary" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employees_positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPosition" Type="int" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="enterprises_info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="140" Nullable="false" />
+          <Property Name="WorkingCapital" Type="decimal" Precision="13" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="YearsWork" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="AmortizationSumInMonth" Type="decimal" Precision="13" Scale="3" />
+        </EntityType>
+        <EntityType Name="fixed_costs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategory" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="145" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="manufacturing_operations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ExecutionTime" Type="time" Precision="0" />
+          <Property Name="NormPerDay" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTypeMaterials" Type="int" Nullable="false" />
+          <Property Name="Manufacturer" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="monthly_costs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFixedCost" Type="int" Nullable="false" />
+          <Property Name="DayAccrual" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="operaions_products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOperation" Type="int" Nullable="false" />
+          <Property Name="IdProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdStatusOrder" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="other_costs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategory" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="145" />
+        </EntityType>
+        <EntityType Name="other_revenue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="packing_list">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payments_fixed_costs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFixedCost" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payments_salary_prepay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTypeProduct" Type="int" Nullable="false" />
+          <Property Name="IdOrder" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="products_materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProduct" Type="int" Nullable="false" />
+          <Property Name="IdMaterial" Type="int" Nullable="false" />
+          <Property Name="QuantityMaterial" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="recommendations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdConditionManufacturing" Type="int" Nullable="false" />
+          <Property Name="IdConditionFinance" Type="int" Nullable="false" />
+          <Property Name="IdConditionOrdersAndEmployees" Type="int" Nullable="false" />
+          <Property Name="StateDescription" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="RecommendationText" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="records_packing_list">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPackingList" Type="int" Nullable="false" />
+          <Property Name="IdMaterial" Type="int" Nullable="false" />
+          <Property Name="QuantityUnits" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salary_payments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="13" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status_order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="types_materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdUnitMeasure" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="types_products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PlannedQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="units_measures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortTitle" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="FullTitle" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="weekly_costs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFixedCost" Type="int" Nullable="false" />
+          <Property Name="DayAccrual" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="write_off_materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IdMaterial" Type="int" Nullable="false" />
+          <Property Name="QuantityUnits" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FromAccrualPointsRWPToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="accrual_points_rwp" Type="Self.accrual_points_rwp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accrual_points_rwp">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromBonusSalaryToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bonus_salaries" Type="Self.bonus_salaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="bonus_salaries">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromContractPaymentToOrderContracts">
+          <End Role="contracts" Type="Self.contracts" Multiplicity="1" />
+          <End Role="contract_payments" Type="Self.contract_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="contract_payments">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromContractsToOrders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contracts" Type="Self.contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="contracts">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromDeductionsFromSalaryToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="deductions_from_salary" Type="Self.deductions_from_salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="deductions_from_salary">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromEmployees_PositionsToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees_positions" Type="Self.employees_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employees_positions">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromEmployees_PositionsToPositions">
+          <End Role="positions" Type="Self.positions" Multiplicity="1" />
+          <End Role="employees_positions" Type="Self.employees_positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employees_positions">
+              <PropertyRef Name="IdPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromFixedCostsToCostCategories">
+          <End Role="cost_categories" Type="Self.cost_categories" Multiplicity="0..1" />
+          <End Role="fixed_costs" Type="Self.fixed_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cost_categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="fixed_costs">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromMaterialsToTypesMaterials">
+          <End Role="types_materials" Type="Self.types_materials" Multiplicity="1" />
+          <End Role="materials" Type="Self.materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="materials">
+              <PropertyRef Name="IdTypeMaterials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromMontlyCostsToFixedCosts">
+          <End Role="fixed_costs" Type="Self.fixed_costs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="monthly_costs" Type="Self.monthly_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="monthly_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOperationsProductsToManufacturingOperations">
+          <End Role="manufacturing_operations" Type="Self.manufacturing_operations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="operaions_products" Type="Self.operaions_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturing_operations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="operaions_products">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOperationsProductsToProducts">
+          <End Role="products" Type="Self.products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="operaions_products" Type="Self.operaions_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="operaions_products">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOrdersToClients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOrdersToStatusOrder">
+          <End Role="status_order" Type="Self.status_order" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdStatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOtherCostsToCostCategories">
+          <End Role="cost_categories" Type="Self.cost_categories" Multiplicity="0..1" />
+          <End Role="other_costs" Type="Self.other_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cost_categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="other_costs">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromPaymentsFixedCostsToFixedCosts">
+          <End Role="fixed_costs" Type="Self.fixed_costs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="payments_fixed_costs" Type="Self.payments_fixed_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="payments_fixed_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromPaymentsSalaryPrepayToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="payments_salary_prepay" Type="Self.payments_salary_prepay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="payments_salary_prepay">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsMaterialsToMaterials">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="products_materials" Type="Self.products_materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products_materials">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsMaterialsToProducts">
+          <End Role="products" Type="Self.products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="products_materials" Type="Self.products_materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products_materials">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsToOrders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsToTypesProducts">
+          <End Role="types_products" Type="Self.types_products" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="IdTypeProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendateionsToConditionsManufacturing">
+          <End Role="conditions_manufacturing" Type="Self.conditions_manufacturing" Multiplicity="1" />
+          <End Role="recommendations" Type="Self.recommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_manufacturing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionManufacturing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendationsToConditionsFinance">
+          <End Role="conditions_finace" Type="Self.conditions_finace" Multiplicity="1" />
+          <End Role="recommendations" Type="Self.recommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_finace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionFinance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendationsToConditionsOrdersAndEmployees">
+          <End Role="conditions_orders_and_employees" Type="Self.conditions_orders_and_employees" Multiplicity="1" />
+          <End Role="recommendations" Type="Self.recommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_orders_and_employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionOrdersAndEmployees" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecordPackingListToMaterials">
+          <End Role="materials" Type="Self.materials" Multiplicity="1" />
+          <End Role="records_packing_list" Type="Self.records_packing_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="records_packing_list">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecordPackingListToPackingList">
+          <End Role="packing_list" Type="Self.packing_list" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="records_packing_list" Type="Self.records_packing_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="packing_list">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="records_packing_list">
+              <PropertyRef Name="IdPackingList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromSalaryPaymentsToEmployees">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="salary_payments" Type="Self.salary_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="salary_payments">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromTypesMaterialsToUnitsMeasures">
+          <End Role="units_measures" Type="Self.units_measures" Multiplicity="1" />
+          <End Role="types_materials" Type="Self.types_materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units_measures">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="types_materials">
+              <PropertyRef Name="IdUnitMeasure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromWeeklyCostsToFixedCosts">
+          <End Role="fixed_costs" Type="Self.fixed_costs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="weekly_costs" Type="Self.weekly_costs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="weekly_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromWriteOffMaterialsToMaterials">
+          <End Role="materials" Type="Self.materials" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="write_off_materials" Type="Self.write_off_materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="write_off_materials">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sql11508062ModelStoreContainer">
+          <EntitySet Name="accrual_points_rwp" EntityType="Self.accrual_points_rwp" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="bonus_salaries" EntityType="Self.bonus_salaries" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="conditions_finace" EntityType="Self.conditions_finace" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="conditions_manufacturing" EntityType="Self.conditions_manufacturing" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="conditions_orders_and_employees" EntityType="Self.conditions_orders_and_employees" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="contract_payments" EntityType="Self.contract_payments" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="contracts" EntityType="Self.contracts" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="cost_categories" EntityType="Self.cost_categories" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="deductions_from_salary" EntityType="Self.deductions_from_salary" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="employees_positions" EntityType="Self.employees_positions" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="enterprises_info" EntityType="Self.enterprises_info" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="equipments" EntityType="Self.equipments" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="fixed_costs" EntityType="Self.fixed_costs" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="manufacturing_operations" EntityType="Self.manufacturing_operations" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="materials" EntityType="Self.materials" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="monthly_costs" EntityType="Self.monthly_costs" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="operaions_products" EntityType="Self.operaions_products" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="other_costs" EntityType="Self.other_costs" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="other_revenue" EntityType="Self.other_revenue" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="packing_list" EntityType="Self.packing_list" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="payments_fixed_costs" EntityType="Self.payments_fixed_costs" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="payments_salary_prepay" EntityType="Self.payments_salary_prepay" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="positions" EntityType="Self.positions" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="products_materials" EntityType="Self.products_materials" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="recommendations" EntityType="Self.recommendations" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="records_packing_list" EntityType="Self.records_packing_list" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="salary_payments" EntityType="Self.salary_payments" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="status_order" EntityType="Self.status_order" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="types_materials" EntityType="Self.types_materials" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="types_products" EntityType="Self.types_products" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="units_measures" EntityType="Self.units_measures" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="weekly_costs" EntityType="Self.weekly_costs" Schema="sql11508062" store:Type="Tables" />
+          <EntitySet Name="write_off_materials" EntityType="Self.write_off_materials" Schema="sql11508062" store:Type="Tables" />
+          <AssociationSet Name="FK_FromAccrualPointsRWPToEmployees" Association="Self.FK_FromAccrualPointsRWPToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="accrual_points_rwp" EntitySet="accrual_points_rwp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromBonusSalaryToEmployees" Association="Self.FK_FromBonusSalaryToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="bonus_salaries" EntitySet="bonus_salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromContractPaymentToOrderContracts" Association="Self.FK_FromContractPaymentToOrderContracts">
+            <End Role="contracts" EntitySet="contracts" />
+            <End Role="contract_payments" EntitySet="contract_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromContractsToOrders" Association="Self.FK_FromContractsToOrders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="contracts" EntitySet="contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromDeductionsFromSalaryToEmployees" Association="Self.FK_FromDeductionsFromSalaryToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="deductions_from_salary" EntitySet="deductions_from_salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromEmployees_PositionsToEmployees" Association="Self.FK_FromEmployees_PositionsToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="employees_positions" EntitySet="employees_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromEmployees_PositionsToPositions" Association="Self.FK_FromEmployees_PositionsToPositions">
+            <End Role="positions" EntitySet="positions" />
+            <End Role="employees_positions" EntitySet="employees_positions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromFixedCostsToCostCategories" Association="Self.FK_FromFixedCostsToCostCategories">
+            <End Role="cost_categories" EntitySet="cost_categories" />
+            <End Role="fixed_costs" EntitySet="fixed_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromMaterialsToTypesMaterials" Association="Self.FK_FromMaterialsToTypesMaterials">
+            <End Role="types_materials" EntitySet="types_materials" />
+            <End Role="materials" EntitySet="materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromMontlyCostsToFixedCosts" Association="Self.FK_FromMontlyCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="fixed_costs" />
+            <End Role="monthly_costs" EntitySet="monthly_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOperationsProductsToManufacturingOperations" Association="Self.FK_FromOperationsProductsToManufacturingOperations">
+            <End Role="manufacturing_operations" EntitySet="manufacturing_operations" />
+            <End Role="operaions_products" EntitySet="operaions_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOperationsProductsToProducts" Association="Self.FK_FromOperationsProductsToProducts">
+            <End Role="products" EntitySet="products" />
+            <End Role="operaions_products" EntitySet="operaions_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOrdersToClients" Association="Self.FK_FromOrdersToClients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOrdersToStatusOrder" Association="Self.FK_FromOrdersToStatusOrder">
+            <End Role="status_order" EntitySet="status_order" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOtherCostsToCostCategories" Association="Self.FK_FromOtherCostsToCostCategories">
+            <End Role="cost_categories" EntitySet="cost_categories" />
+            <End Role="other_costs" EntitySet="other_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromPaymentsFixedCostsToFixedCosts" Association="Self.FK_FromPaymentsFixedCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="fixed_costs" />
+            <End Role="payments_fixed_costs" EntitySet="payments_fixed_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromPaymentsSalaryPrepayToEmployees" Association="Self.FK_FromPaymentsSalaryPrepayToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="payments_salary_prepay" EntitySet="payments_salary_prepay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsMaterialsToMaterials" Association="Self.FK_FromProductsMaterialsToMaterials">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="products_materials" EntitySet="products_materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsMaterialsToProducts" Association="Self.FK_FromProductsMaterialsToProducts">
+            <End Role="products" EntitySet="products" />
+            <End Role="products_materials" EntitySet="products_materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsToOrders" Association="Self.FK_FromProductsToOrders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsToTypesProducts" Association="Self.FK_FromProductsToTypesProducts">
+            <End Role="types_products" EntitySet="types_products" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendateionsToConditionsManufacturing" Association="Self.FK_FromRecommendateionsToConditionsManufacturing">
+            <End Role="conditions_manufacturing" EntitySet="conditions_manufacturing" />
+            <End Role="recommendations" EntitySet="recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendationsToConditionsFinance" Association="Self.FK_FromRecommendationsToConditionsFinance">
+            <End Role="conditions_finace" EntitySet="conditions_finace" />
+            <End Role="recommendations" EntitySet="recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendationsToConditionsOrdersAndEmployees" Association="Self.FK_FromRecommendationsToConditionsOrdersAndEmployees">
+            <End Role="conditions_orders_and_employees" EntitySet="conditions_orders_and_employees" />
+            <End Role="recommendations" EntitySet="recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecordPackingListToMaterials" Association="Self.FK_FromRecordPackingListToMaterials">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="records_packing_list" EntitySet="records_packing_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecordPackingListToPackingList" Association="Self.FK_FromRecordPackingListToPackingList">
+            <End Role="packing_list" EntitySet="packing_list" />
+            <End Role="records_packing_list" EntitySet="records_packing_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromSalaryPaymentsToEmployees" Association="Self.FK_FromSalaryPaymentsToEmployees">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="salary_payments" EntitySet="salary_payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromTypesMaterialsToUnitsMeasures" Association="Self.FK_FromTypesMaterialsToUnitsMeasures">
+            <End Role="units_measures" EntitySet="units_measures" />
+            <End Role="types_materials" EntitySet="types_materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromWeeklyCostsToFixedCosts" Association="Self.FK_FromWeeklyCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="fixed_costs" />
+            <End Role="weekly_costs" EntitySet="weekly_costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromWriteOffMaterialsToMaterials" Association="Self.FK_FromWriteOffMaterialsToMaterials">
+            <End Role="materials" EntitySet="materials" />
+            <End Role="write_off_materials" EntitySet="write_off_materials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sql11508062Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccrualPointsRwp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromAccrualPointsRWPToEmployees" FromRole="accrual_points_rwp" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="BonusSalary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromBonusSalaryToEmployees" FromRole="bonus_salaries" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_FromOrdersToClients" FromRole="clients" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="ConditionFinance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsPredictedProfitNegative" Type="SByte" />
+          <Property Name="IsWorkingCapitalNotEnough" Type="SByte" />
+          <Property Name="IsWorkingCapitalEnoughSalary" Type="SByte" />
+          <Property Name="IsWokingCapitalEnoughMaterial" Type="SByte" />
+          <Property Name="IsWorkingCapitalEnoughFixedCosts" Type="SByte" />
+          <NavigationProperty Name="recommendations" Relationship="Self.FK_FromRecommendationsToConditionsFinance" FromRole="conditions_finace" ToRole="recommendations" />
+        </EntityType>
+        <EntityType Name="ConditionManufacturing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductsProductionExceedsPredicted" Type="SByte" />
+          <Property Name="PercentOperationsExceedNorm" Type="Double" />
+          <NavigationProperty Name="recommendations" Relationship="Self.FK_FromRecommendateionsToConditionsManufacturing" FromRole="conditions_manufacturing" ToRole="recommendations" />
+        </EntityType>
+        <EntityType Name="ConditionOrdersAndEmployees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HasEmployeesManyPosition" Type="SByte" />
+          <Property Name="HasCompletedOrdersUnpaid" Type="SByte" />
+          <Property Name="HasIncompleteOrdersProductionTimeViolations" Type="SByte" />
+          <NavigationProperty Name="recommendations" Relationship="Self.FK_FromRecommendationsToConditionsOrdersAndEmployees" FromRole="conditions_orders_and_employees" ToRole="recommendations" />
+        </EntityType>
+        <EntityType Name="ContractPayment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContract" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="contract" Relationship="Self.FK_FromContractPaymentToOrderContracts" FromRole="contract_payments" ToRole="contracts" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOrder" Type="Int32" Nullable="false" />
+          <Property Name="DateSigning" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="Prepayment" Type="Decimal" Nullable="false" />
+          <Property Name="ProductionDays" Type="Int32" Nullable="false" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="contract_payments" Relationship="Self.FK_FromContractPaymentToOrderContracts" FromRole="contracts" ToRole="contract_payments" />
+          <NavigationProperty Name="order" Relationship="Self.FK_FromContractsToOrders" FromRole="contracts" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="CostCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="145" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="fixed_costs" Relationship="Self.FK_FromFixedCostsToCostCategories" FromRole="cost_categories" ToRole="fixed_costs" />
+          <NavigationProperty Name="other_costs" Relationship="Self.FK_FromOtherCostsToCostCategories" FromRole="cost_categories" ToRole="other_costs" />
+        </EntityType>
+        <EntityType Name="DeductionFromSalary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromDeductionsFromSalaryToEmployees" FromRole="deductions_from_salary" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SumSalary" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="accrual_points_rwp" Relationship="Self.FK_FromAccrualPointsRWPToEmployees" FromRole="employees" ToRole="accrual_points_rwp" />
+          <NavigationProperty Name="bonus_salaries" Relationship="Self.FK_FromBonusSalaryToEmployees" FromRole="employees" ToRole="bonus_salaries" />
+          <NavigationProperty Name="deductions_from_salary" Relationship="Self.FK_FromDeductionsFromSalaryToEmployees" FromRole="employees" ToRole="deductions_from_salary" />
+          <NavigationProperty Name="employees_positions" Relationship="Self.FK_FromEmployees_PositionsToEmployees" FromRole="employees" ToRole="employees_positions" />
+          <NavigationProperty Name="payments_salary_prepay" Relationship="Self.FK_FromPaymentsSalaryPrepayToEmployees" FromRole="employees" ToRole="payments_salary_prepay" />
+          <NavigationProperty Name="salary_payments" Relationship="Self.FK_FromSalaryPaymentsToEmployees" FromRole="employees" ToRole="salary_payments" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPosition" Type="Int32" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromEmployees_PositionsToEmployees" FromRole="employees_positions" ToRole="employees" />
+          <NavigationProperty Name="position" Relationship="Self.FK_FromEmployees_PositionsToPositions" FromRole="employees_positions" ToRole="positions" />
+        </EntityType>
+        <EntityType Name="EnterpriseInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkingCapital" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FixedCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategory" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="145" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="cost_categories" Relationship="Self.FK_FromFixedCostsToCostCategories" FromRole="fixed_costs" ToRole="cost_categories" />
+          <NavigationProperty Name="monthly_costs" Relationship="Self.FK_FromMontlyCostsToFixedCosts" FromRole="fixed_costs" ToRole="monthly_costs" />
+          <NavigationProperty Name="payments_fixed_costs" Relationship="Self.FK_FromPaymentsFixedCostsToFixedCosts" FromRole="fixed_costs" ToRole="payments_fixed_costs" />
+          <NavigationProperty Name="weekly_costs" Relationship="Self.FK_FromWeeklyCostsToFixedCosts" FromRole="fixed_costs" ToRole="weekly_costs" />
+        </EntityType>
+        <EntityType Name="ManufacturingOperation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExecutionTime" Type="Time" />
+          <Property Name="NormPerDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="operaions_products" Relationship="Self.FK_FromOperationsProductsToManufacturingOperations" FromRole="manufacturing_operations" ToRole="operaions_products" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTypeMaterials" Type="Int32" Nullable="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="types_materials" Relationship="Self.FK_FromMaterialsToTypesMaterials" FromRole="materials" ToRole="types_materials" />
+          <NavigationProperty Name="products_materials" Relationship="Self.FK_FromProductsMaterialsToMaterials" FromRole="materials" ToRole="products_materials" />
+          <NavigationProperty Name="records_packing_list" Relationship="Self.FK_FromRecordPackingListToMaterials" FromRole="materials" ToRole="records_packing_list" />
+          <NavigationProperty Name="write_off_materials" Relationship="Self.FK_FromWriteOffMaterialsToMaterials" FromRole="materials" ToRole="write_off_materials" />
+        </EntityType>
+        <EntityType Name="MonthlyCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFixedCost" Type="Int32" Nullable="false" />
+          <Property Name="DayAccrual" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fixed_costs" Relationship="Self.FK_FromMontlyCostsToFixedCosts" FromRole="monthly_costs" ToRole="fixed_costs" />
+        </EntityType>
+        <EntityType Name="OperationProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOperation" Type="Int32" Nullable="false" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="manufacturing_operations" Relationship="Self.FK_FromOperationsProductsToManufacturingOperations" FromRole="operaions_products" ToRole="manufacturing_operations" />
+          <NavigationProperty Name="product" Relationship="Self.FK_FromOperationsProductsToProducts" FromRole="operaions_products" ToRole="products" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdStatusOrder" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK_FromOrdersToClients" FromRole="orders" ToRole="clients" />
+          <NavigationProperty Name="contracts" Relationship="Self.FK_FromContractsToOrders" FromRole="orders" ToRole="contracts" />
+          <NavigationProperty Name="status_order" Relationship="Self.FK_FromOrdersToStatusOrder" FromRole="orders" ToRole="status_order" />
+          <NavigationProperty Name="products" Relationship="Self.FK_FromProductsToOrders" FromRole="orders" ToRole="products" />
+        </EntityType>
+        <EntityType Name="OtherCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategory" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="145" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cost_categories" Relationship="Self.FK_FromOtherCostsToCostCategories" FromRole="other_costs" ToRole="cost_categories" />
+        </EntityType>
+        <EntityType Name="OtherRevenue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PackingList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="records_packing_list" Relationship="Self.FK_FromRecordPackingListToPackingList" FromRole="packing_list" ToRole="records_packing_list" />
+        </EntityType>
+        <EntityType Name="PaymentFixedCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFixedCost" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="fixed_costs" Relationship="Self.FK_FromPaymentsFixedCostsToFixedCosts" FromRole="payments_fixed_costs" ToRole="fixed_costs" />
+        </EntityType>
+        <EntityType Name="PaymentSalaryPrepay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromPaymentsSalaryPrepayToEmployees" FromRole="payments_salary_prepay" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="employees_positions" Relationship="Self.FK_FromEmployees_PositionsToPositions" FromRole="positions" ToRole="employees_positions" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTypeProduct" Type="Int32" Nullable="false" />
+          <Property Name="IdOrder" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="operaions_products" Relationship="Self.FK_FromOperationsProductsToProducts" FromRole="products" ToRole="operaions_products" />
+          <NavigationProperty Name="order" Relationship="Self.FK_FromProductsToOrders" FromRole="products" ToRole="orders" />
+          <NavigationProperty Name="products_materials" Relationship="Self.FK_FromProductsMaterialsToProducts" FromRole="products" ToRole="products_materials" />
+          <NavigationProperty Name="types_products" Relationship="Self.FK_FromProductsToTypesProducts" FromRole="products" ToRole="types_products" />
+          <Property Name="Quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProduct" Type="Int32" Nullable="false" />
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" />
+          <Property Name="QuantityMaterial" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="material" Relationship="Self.FK_FromProductsMaterialsToMaterials" FromRole="products_materials" ToRole="materials" />
+          <NavigationProperty Name="product" Relationship="Self.FK_FromProductsMaterialsToProducts" FromRole="products_materials" ToRole="products" />
+        </EntityType>
+        <EntityType Name="Recommendation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdConditionManufacturing" Type="Int32" Nullable="false" />
+          <Property Name="IdConditionFinance" Type="Int32" Nullable="false" />
+          <Property Name="IdConditionOrdersAndEmployees" Type="Int32" Nullable="false" />
+          <Property Name="StateDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecommendationText" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="conditions_finace" Relationship="Self.FK_FromRecommendationsToConditionsFinance" FromRole="recommendations" ToRole="conditions_finace" />
+          <NavigationProperty Name="conditions_manufacturing" Relationship="Self.FK_FromRecommendateionsToConditionsManufacturing" FromRole="recommendations" ToRole="conditions_manufacturing" />
+          <NavigationProperty Name="conditions_orders_and_employees" Relationship="Self.FK_FromRecommendationsToConditionsOrdersAndEmployees" FromRole="recommendations" ToRole="conditions_orders_and_employees" />
+        </EntityType>
+        <EntityType Name="RecordPackingList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPackingList" Type="Int32" Nullable="false" />
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" />
+          <Property Name="QuantityUnits" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="material" Relationship="Self.FK_FromRecordPackingListToMaterials" FromRole="records_packing_list" ToRole="materials" />
+          <NavigationProperty Name="packing_list" Relationship="Self.FK_FromRecordPackingListToPackingList" FromRole="records_packing_list" ToRole="packing_list" />
+        </EntityType>
+        <EntityType Name="SalaryPayment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmployee" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_FromSalaryPaymentsToEmployees" FromRole="salary_payments" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="StatusOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_FromOrdersToStatusOrder" FromRole="status_order" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="TypeMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUnitMeasure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="materials" Relationship="Self.FK_FromMaterialsToTypesMaterials" FromRole="types_materials" ToRole="materials" />
+          <NavigationProperty Name="units_measures" Relationship="Self.FK_FromTypesMaterialsToUnitsMeasures" FromRole="types_materials" ToRole="units_measures" />
+        </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlannedQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_FromProductsToTypesProducts" FromRole="types_products" ToRole="products" />
+        </EntityType>
+        <EntityType Name="UnitMeasure">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortTitle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullTitle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="types_materials" Relationship="Self.FK_FromTypesMaterialsToUnitsMeasures" FromRole="units_measures" ToRole="types_materials" />
+        </EntityType>
+        <EntityType Name="WeeklyCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFixedCost" Type="Int32" Nullable="false" />
+          <Property Name="DayAccrual" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fixed_costs" Relationship="Self.FK_FromWeeklyCostsToFixedCosts" FromRole="weekly_costs" ToRole="fixed_costs" />
+        </EntityType>
+        <EntityType Name="WriteOffMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" />
+          <Property Name="QuantityUnits" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="material" Relationship="Self.FK_FromWriteOffMaterialsToMaterials" FromRole="write_off_materials" ToRole="materials" />
+        </EntityType>
+        <Association Name="FK_FromAccrualPointsRWPToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="accrual_points_rwp" Type="sql11508062Model.AccrualPointsRwp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="accrual_points_rwp">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromBonusSalaryToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="bonus_salaries" Type="sql11508062Model.BonusSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="bonus_salaries">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOrdersToClients">
+          <End Role="clients" Type="sql11508062Model.Client" Multiplicity="1" />
+          <End Role="orders" Type="sql11508062Model.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendationsToConditionsFinance">
+          <End Role="conditions_finace" Type="sql11508062Model.ConditionFinance" Multiplicity="1" />
+          <End Role="recommendations" Type="sql11508062Model.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_finace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionFinance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendateionsToConditionsManufacturing">
+          <End Role="conditions_manufacturing" Type="sql11508062Model.ConditionManufacturing" Multiplicity="1" />
+          <End Role="recommendations" Type="sql11508062Model.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_manufacturing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionManufacturing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecommendationsToConditionsOrdersAndEmployees">
+          <End Role="conditions_orders_and_employees" Type="sql11508062Model.ConditionOrdersAndEmployees" Multiplicity="1" />
+          <End Role="recommendations" Type="sql11508062Model.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conditions_orders_and_employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="recommendations">
+              <PropertyRef Name="IdConditionOrdersAndEmployees" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromContractPaymentToOrderContracts">
+          <End Role="contracts" Type="sql11508062Model.Contract" Multiplicity="1" />
+          <End Role="contract_payments" Type="sql11508062Model.ContractPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="contract_payments">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromContractsToOrders">
+          <End Role="orders" Type="sql11508062Model.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contracts" Type="sql11508062Model.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="contracts">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromFixedCostsToCostCategories">
+          <End Role="cost_categories" Type="sql11508062Model.CostCategory" Multiplicity="0..1" />
+          <End Role="fixed_costs" Type="sql11508062Model.FixedCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cost_categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="fixed_costs">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOtherCostsToCostCategories">
+          <End Role="cost_categories" Type="sql11508062Model.CostCategory" Multiplicity="0..1" />
+          <End Role="other_costs" Type="sql11508062Model.OtherCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cost_categories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="other_costs">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromDeductionsFromSalaryToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="deductions_from_salary" Type="sql11508062Model.DeductionFromSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="deductions_from_salary">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromEmployees_PositionsToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees_positions" Type="sql11508062Model.EmployeePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employees_positions">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromPaymentsSalaryPrepayToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="payments_salary_prepay" Type="sql11508062Model.PaymentSalaryPrepay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="payments_salary_prepay">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromSalaryPaymentsToEmployees">
+          <End Role="employees" Type="sql11508062Model.Employee" Multiplicity="0..1" />
+          <End Role="salary_payments" Type="sql11508062Model.SalaryPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="salary_payments">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromEmployees_PositionsToPositions">
+          <End Role="positions" Type="sql11508062Model.Position" Multiplicity="1" />
+          <End Role="employees_positions" Type="sql11508062Model.EmployeePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employees_positions">
+              <PropertyRef Name="IdPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromMontlyCostsToFixedCosts">
+          <End Role="fixed_costs" Type="sql11508062Model.FixedCost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="monthly_costs" Type="sql11508062Model.MonthlyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="monthly_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromPaymentsFixedCostsToFixedCosts">
+          <End Role="fixed_costs" Type="sql11508062Model.FixedCost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="payments_fixed_costs" Type="sql11508062Model.PaymentFixedCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="payments_fixed_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromWeeklyCostsToFixedCosts">
+          <End Role="fixed_costs" Type="sql11508062Model.FixedCost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="weekly_costs" Type="sql11508062Model.WeeklyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fixed_costs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="weekly_costs">
+              <PropertyRef Name="IdFixedCost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOperationsProductsToManufacturingOperations">
+          <End Role="manufacturing_operations" Type="sql11508062Model.ManufacturingOperation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="operaions_products" Type="sql11508062Model.OperationProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturing_operations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="operaions_products">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromMaterialsToTypesMaterials">
+          <End Role="types_materials" Type="sql11508062Model.TypeMaterial" Multiplicity="1" />
+          <End Role="materials" Type="sql11508062Model.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="materials">
+              <PropertyRef Name="IdTypeMaterials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsMaterialsToMaterials">
+          <End Role="materials" Type="sql11508062Model.Material" Multiplicity="1" />
+          <End Role="products_materials" Type="sql11508062Model.ProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products_materials">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecordPackingListToMaterials">
+          <End Role="materials" Type="sql11508062Model.Material" Multiplicity="1" />
+          <End Role="records_packing_list" Type="sql11508062Model.RecordPackingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="records_packing_list">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromWriteOffMaterialsToMaterials">
+          <End Role="materials" Type="sql11508062Model.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="write_off_materials" Type="sql11508062Model.WriteOffMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materials">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="write_off_materials">
+              <PropertyRef Name="IdMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOperationsProductsToProducts">
+          <End Role="products" Type="sql11508062Model.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="operaions_products" Type="sql11508062Model.OperationProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="operaions_products">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromOrdersToStatusOrder">
+          <End Role="status_order" Type="sql11508062Model.StatusOrder" Multiplicity="0..1" />
+          <End Role="orders" Type="sql11508062Model.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdStatusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsToOrders">
+          <End Role="orders" Type="sql11508062Model.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="products" Type="sql11508062Model.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromRecordPackingListToPackingList">
+          <End Role="packing_list" Type="sql11508062Model.PackingList" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="records_packing_list" Type="sql11508062Model.RecordPackingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="packing_list">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="records_packing_list">
+              <PropertyRef Name="IdPackingList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsMaterialsToProducts">
+          <End Role="products" Type="sql11508062Model.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="products_materials" Type="sql11508062Model.ProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products_materials">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromProductsToTypesProducts">
+          <End Role="types_products" Type="sql11508062Model.TypeProduct" Multiplicity="1" />
+          <End Role="products" Type="sql11508062Model.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types_products">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="IdTypeProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FromTypesMaterialsToUnitsMeasures">
+          <End Role="units_measures" Type="sql11508062Model.UnitMeasure" Multiplicity="1" />
+          <End Role="types_materials" Type="sql11508062Model.TypeMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units_measures">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="types_materials">
+              <PropertyRef Name="IdUnitMeasure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccrualsPointsRwp" EntityType="sql11508062Model.AccrualPointsRwp" />
+          <EntitySet Name="BonusSalaries" EntityType="sql11508062Model.BonusSalary" />
+          <EntitySet Name="Clients" EntityType="sql11508062Model.Client" />
+          <EntitySet Name="ConditionsFinance" EntityType="sql11508062Model.ConditionFinance" />
+          <EntitySet Name="ConditionsManufacturing" EntityType="sql11508062Model.ConditionManufacturing" />
+          <EntitySet Name="ConditionsOrdersAndEmployees" EntityType="sql11508062Model.ConditionOrdersAndEmployees" />
+          <EntitySet Name="ContractPayments" EntityType="sql11508062Model.ContractPayment" />
+          <EntitySet Name="Contracts" EntityType="sql11508062Model.Contract" />
+          <EntitySet Name="CostCategories" EntityType="sql11508062Model.CostCategory" />
+          <EntitySet Name="DeductionsFromSalary" EntityType="sql11508062Model.DeductionFromSalary" />
+          <EntitySet Name="Employees" EntityType="sql11508062Model.Employee" />
+          <EntitySet Name="EmployeesPositions" EntityType="sql11508062Model.EmployeePosition" />
+          <EntitySet Name="EnterprisesInfo" EntityType="sql11508062Model.EnterpriseInfo" />
+          <EntitySet Name="FixedCosts" EntityType="sql11508062Model.FixedCost" />
+          <EntitySet Name="ManufacturingOperations" EntityType="sql11508062Model.ManufacturingOperation" />
+          <EntitySet Name="Materials" EntityType="sql11508062Model.Material" />
+          <EntitySet Name="MonthlyCosts" EntityType="sql11508062Model.MonthlyCost" />
+          <EntitySet Name="OperationsProducts" EntityType="sql11508062Model.OperationProduct" />
+          <EntitySet Name="Orders" EntityType="sql11508062Model.Order" />
+          <EntitySet Name="OtherCosts" EntityType="sql11508062Model.OtherCost" />
+          <EntitySet Name="OtherRevenues" EntityType="sql11508062Model.OtherRevenue" />
+          <EntitySet Name="PackingLists" EntityType="sql11508062Model.PackingList" />
+          <EntitySet Name="PaymentsFixedCosts" EntityType="sql11508062Model.PaymentFixedCost" />
+          <EntitySet Name="PaymentsSalaryPrepay" EntityType="sql11508062Model.PaymentSalaryPrepay" />
+          <EntitySet Name="Positions" EntityType="sql11508062Model.Position" />
+          <EntitySet Name="Products" EntityType="sql11508062Model.Product" />
+          <EntitySet Name="ProductsMaterials" EntityType="sql11508062Model.ProductMaterial" />
+          <EntitySet Name="Recommendations" EntityType="sql11508062Model.Recommendation" />
+          <EntitySet Name="RecordsPackingList" EntityType="sql11508062Model.RecordPackingList" />
+          <EntitySet Name="SalaryPayments" EntityType="sql11508062Model.SalaryPayment" />
+          <EntitySet Name="StatusOrders" EntityType="sql11508062Model.StatusOrder" />
+          <EntitySet Name="TypesMaterials" EntityType="sql11508062Model.TypeMaterial" />
+          <EntitySet Name="TypesProducts" EntityType="sql11508062Model.TypeProduct" />
+          <EntitySet Name="UnitsMeasures" EntityType="sql11508062Model.UnitMeasure" />
+          <EntitySet Name="WeeklyCosts" EntityType="sql11508062Model.WeeklyCost" />
+          <EntitySet Name="WriteOffMaterials" EntityType="sql11508062Model.WriteOffMaterial" />
+          <AssociationSet Name="FK_FromAccrualPointsRWPToEmployees" Association="Self.FK_FromAccrualPointsRWPToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="accrual_points_rwp" EntitySet="AccrualsPointsRwp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromBonusSalaryToEmployees" Association="Self.FK_FromBonusSalaryToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="bonus_salaries" EntitySet="BonusSalaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOrdersToClients" Association="Self.FK_FromOrdersToClients">
+            <End Role="clients" EntitySet="Clients" />
+            <End Role="orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendationsToConditionsFinance" Association="Self.FK_FromRecommendationsToConditionsFinance">
+            <End Role="conditions_finace" EntitySet="ConditionsFinance" />
+            <End Role="recommendations" EntitySet="Recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendateionsToConditionsManufacturing" Association="Self.FK_FromRecommendateionsToConditionsManufacturing">
+            <End Role="conditions_manufacturing" EntitySet="ConditionsManufacturing" />
+            <End Role="recommendations" EntitySet="Recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecommendationsToConditionsOrdersAndEmployees" Association="Self.FK_FromRecommendationsToConditionsOrdersAndEmployees">
+            <End Role="conditions_orders_and_employees" EntitySet="ConditionsOrdersAndEmployees" />
+            <End Role="recommendations" EntitySet="Recommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromContractPaymentToOrderContracts" Association="Self.FK_FromContractPaymentToOrderContracts">
+            <End Role="contracts" EntitySet="Contracts" />
+            <End Role="contract_payments" EntitySet="ContractPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromContractsToOrders" Association="Self.FK_FromContractsToOrders">
+            <End Role="orders" EntitySet="Orders" />
+            <End Role="contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromFixedCostsToCostCategories" Association="Self.FK_FromFixedCostsToCostCategories">
+            <End Role="cost_categories" EntitySet="CostCategories" />
+            <End Role="fixed_costs" EntitySet="FixedCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOtherCostsToCostCategories" Association="Self.FK_FromOtherCostsToCostCategories">
+            <End Role="cost_categories" EntitySet="CostCategories" />
+            <End Role="other_costs" EntitySet="OtherCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromDeductionsFromSalaryToEmployees" Association="Self.FK_FromDeductionsFromSalaryToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="deductions_from_salary" EntitySet="DeductionsFromSalary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromEmployees_PositionsToEmployees" Association="Self.FK_FromEmployees_PositionsToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="employees_positions" EntitySet="EmployeesPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromPaymentsSalaryPrepayToEmployees" Association="Self.FK_FromPaymentsSalaryPrepayToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="payments_salary_prepay" EntitySet="PaymentsSalaryPrepay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromSalaryPaymentsToEmployees" Association="Self.FK_FromSalaryPaymentsToEmployees">
+            <End Role="employees" EntitySet="Employees" />
+            <End Role="salary_payments" EntitySet="SalaryPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromEmployees_PositionsToPositions" Association="Self.FK_FromEmployees_PositionsToPositions">
+            <End Role="positions" EntitySet="Positions" />
+            <End Role="employees_positions" EntitySet="EmployeesPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromMontlyCostsToFixedCosts" Association="Self.FK_FromMontlyCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="FixedCosts" />
+            <End Role="monthly_costs" EntitySet="MonthlyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromPaymentsFixedCostsToFixedCosts" Association="Self.FK_FromPaymentsFixedCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="FixedCosts" />
+            <End Role="payments_fixed_costs" EntitySet="PaymentsFixedCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromWeeklyCostsToFixedCosts" Association="Self.FK_FromWeeklyCostsToFixedCosts">
+            <End Role="fixed_costs" EntitySet="FixedCosts" />
+            <End Role="weekly_costs" EntitySet="WeeklyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOperationsProductsToManufacturingOperations" Association="Self.FK_FromOperationsProductsToManufacturingOperations">
+            <End Role="manufacturing_operations" EntitySet="ManufacturingOperations" />
+            <End Role="operaions_products" EntitySet="OperationsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromMaterialsToTypesMaterials" Association="Self.FK_FromMaterialsToTypesMaterials">
+            <End Role="types_materials" EntitySet="TypesMaterials" />
+            <End Role="materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsMaterialsToMaterials" Association="Self.FK_FromProductsMaterialsToMaterials">
+            <End Role="materials" EntitySet="Materials" />
+            <End Role="products_materials" EntitySet="ProductsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecordPackingListToMaterials" Association="Self.FK_FromRecordPackingListToMaterials">
+            <End Role="materials" EntitySet="Materials" />
+            <End Role="records_packing_list" EntitySet="RecordsPackingList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromWriteOffMaterialsToMaterials" Association="Self.FK_FromWriteOffMaterialsToMaterials">
+            <End Role="materials" EntitySet="Materials" />
+            <End Role="write_off_materials" EntitySet="WriteOffMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOperationsProductsToProducts" Association="Self.FK_FromOperationsProductsToProducts">
+            <End Role="products" EntitySet="Products" />
+            <End Role="operaions_products" EntitySet="OperationsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromOrdersToStatusOrder" Association="Self.FK_FromOrdersToStatusOrder">
+            <End Role="status_order" EntitySet="StatusOrders" />
+            <End Role="orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsToOrders" Association="Self.FK_FromProductsToOrders">
+            <End Role="orders" EntitySet="Orders" />
+            <End Role="products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromRecordPackingListToPackingList" Association="Self.FK_FromRecordPackingListToPackingList">
+            <End Role="packing_list" EntitySet="PackingLists" />
+            <End Role="records_packing_list" EntitySet="RecordsPackingList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsMaterialsToProducts" Association="Self.FK_FromProductsMaterialsToProducts">
+            <End Role="products" EntitySet="Products" />
+            <End Role="products_materials" EntitySet="ProductsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromProductsToTypesProducts" Association="Self.FK_FromProductsToTypesProducts">
+            <End Role="types_products" EntitySet="TypesProducts" />
+            <End Role="products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FromTypesMaterialsToUnitsMeasures" Association="Self.FK_FromTypesMaterialsToUnitsMeasures">
+            <End Role="units_measures" EntitySet="UnitsMeasures" />
+            <End Role="types_materials" EntitySet="TypesMaterials" />
+          </AssociationSet>
+          <EntitySet Name="Equipments" EntityType="sql11508062Model.Equipment" />
+        </EntityContainer>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="YearsWork" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="AmortizationSumInMonth" Type="Decimal" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sql11508062ModelStoreContainer" CdmEntityContainer="DbEntities">
+          <EntitySetMapping Name="AccrualsPointsRwp">
+            <EntityTypeMapping TypeName="sql11508062Model.AccrualPointsRwp">
+              <MappingFragment StoreEntitySet="accrual_points_rwp">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BonusSalaries">
+            <EntityTypeMapping TypeName="sql11508062Model.BonusSalary">
+              <MappingFragment StoreEntitySet="bonus_salaries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="sql11508062Model.Client">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConditionsFinance">
+            <EntityTypeMapping TypeName="sql11508062Model.ConditionFinance">
+              <MappingFragment StoreEntitySet="conditions_finace">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsPredictedProfitNegative" ColumnName="IsPredictedProfitNegative" />
+                <ScalarProperty Name="IsWorkingCapitalNotEnough" ColumnName="IsWorkingCapitalNotEnough" />
+                <ScalarProperty Name="IsWorkingCapitalEnoughSalary" ColumnName="IsWorkingCapitalEnoughSalary" />
+                <ScalarProperty Name="IsWokingCapitalEnoughMaterial" ColumnName="IsWokingCapitalEnoughMaterial" />
+                <ScalarProperty Name="IsWorkingCapitalEnoughFixedCosts" ColumnName="IsWorkingCapitalEnoughFixedCosts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConditionsManufacturing">
+            <EntityTypeMapping TypeName="sql11508062Model.ConditionManufacturing">
+              <MappingFragment StoreEntitySet="conditions_manufacturing">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductsProductionExceedsPredicted" ColumnName="ProductsProductionExceedsPredicted" />
+                <ScalarProperty Name="PercentOperationsExceedNorm" ColumnName="PercentOperationsExceedNorm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConditionsOrdersAndEmployees">
+            <EntityTypeMapping TypeName="sql11508062Model.ConditionOrdersAndEmployees">
+              <MappingFragment StoreEntitySet="conditions_orders_and_employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HasEmployeesManyPosition" ColumnName="HasEmployeesManyPosition" />
+                <ScalarProperty Name="HasCompletedOrdersUnpaid" ColumnName="HasCompletedOrdersUnpaid" />
+                <ScalarProperty Name="HasIncompleteOrdersProductionTimeViolations" ColumnName="HasIncompleteOrdersProductionTimeViolations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractPayments">
+            <EntityTypeMapping TypeName="sql11508062Model.ContractPayment">
+              <MappingFragment StoreEntitySet="contract_payments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="sql11508062Model.Contract">
+              <MappingFragment StoreEntitySet="contracts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="DateSigning" ColumnName="DateSigning" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Prepayment" ColumnName="Prepayment" />
+                <ScalarProperty Name="ProductionDays" ColumnName="ProductionDays" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CostCategories">
+            <EntityTypeMapping TypeName="sql11508062Model.CostCategory">
+              <MappingFragment StoreEntitySet="cost_categories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeductionsFromSalary">
+            <EntityTypeMapping TypeName="sql11508062Model.DeductionFromSalary">
+              <MappingFragment StoreEntitySet="deductions_from_salary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="sql11508062Model.Employee">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="SumSalary" ColumnName="SumSalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeesPositions">
+            <EntityTypeMapping TypeName="sql11508062Model.EmployeePosition">
+              <MappingFragment StoreEntitySet="employees_positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdPosition" ColumnName="IdPosition" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnterprisesInfo">
+            <EntityTypeMapping TypeName="sql11508062Model.EnterpriseInfo">
+              <MappingFragment StoreEntitySet="enterprises_info">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="WorkingCapital" ColumnName="WorkingCapital" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FixedCosts">
+            <EntityTypeMapping TypeName="sql11508062Model.FixedCost">
+              <MappingFragment StoreEntitySet="fixed_costs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufacturingOperations">
+            <EntityTypeMapping TypeName="sql11508062Model.ManufacturingOperation">
+              <MappingFragment StoreEntitySet="manufacturing_operations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExecutionTime" ColumnName="ExecutionTime" />
+                <ScalarProperty Name="NormPerDay" ColumnName="NormPerDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="sql11508062Model.Material">
+              <MappingFragment StoreEntitySet="materials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdTypeMaterials" ColumnName="IdTypeMaterials" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyCosts">
+            <EntityTypeMapping TypeName="sql11508062Model.MonthlyCost">
+              <MappingFragment StoreEntitySet="monthly_costs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdFixedCost" ColumnName="IdFixedCost" />
+                <ScalarProperty Name="DayAccrual" ColumnName="DayAccrual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationsProducts">
+            <EntityTypeMapping TypeName="sql11508062Model.OperationProduct">
+              <MappingFragment StoreEntitySet="operaions_products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="sql11508062Model.Order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdStatusOrder" ColumnName="IdStatusOrder" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherCosts">
+            <EntityTypeMapping TypeName="sql11508062Model.OtherCost">
+              <MappingFragment StoreEntitySet="other_costs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherRevenues">
+            <EntityTypeMapping TypeName="sql11508062Model.OtherRevenue">
+              <MappingFragment StoreEntitySet="other_revenue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackingLists">
+            <EntityTypeMapping TypeName="sql11508062Model.PackingList">
+              <MappingFragment StoreEntitySet="packing_list">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentsFixedCosts">
+            <EntityTypeMapping TypeName="sql11508062Model.PaymentFixedCost">
+              <MappingFragment StoreEntitySet="payments_fixed_costs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdFixedCost" ColumnName="IdFixedCost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentsSalaryPrepay">
+            <EntityTypeMapping TypeName="sql11508062Model.PaymentSalaryPrepay">
+              <MappingFragment StoreEntitySet="payments_salary_prepay">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="sql11508062Model.Position">
+              <MappingFragment StoreEntitySet="positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="sql11508062Model.Product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdTypeProduct" ColumnName="IdTypeProduct" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsMaterials">
+            <EntityTypeMapping TypeName="sql11508062Model.ProductMaterial">
+              <MappingFragment StoreEntitySet="products_materials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="QuantityMaterial" ColumnName="QuantityMaterial" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recommendations">
+            <EntityTypeMapping TypeName="sql11508062Model.Recommendation">
+              <MappingFragment StoreEntitySet="recommendations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdConditionManufacturing" ColumnName="IdConditionManufacturing" />
+                <ScalarProperty Name="IdConditionFinance" ColumnName="IdConditionFinance" />
+                <ScalarProperty Name="IdConditionOrdersAndEmployees" ColumnName="IdConditionOrdersAndEmployees" />
+                <ScalarProperty Name="StateDescription" ColumnName="StateDescription" />
+                <ScalarProperty Name="RecommendationText" ColumnName="RecommendationText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecordsPackingList">
+            <EntityTypeMapping TypeName="sql11508062Model.RecordPackingList">
+              <MappingFragment StoreEntitySet="records_packing_list">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdPackingList" ColumnName="IdPackingList" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="QuantityUnits" ColumnName="QuantityUnits" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryPayments">
+            <EntityTypeMapping TypeName="sql11508062Model.SalaryPayment">
+              <MappingFragment StoreEntitySet="salary_payments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusOrders">
+            <EntityTypeMapping TypeName="sql11508062Model.StatusOrder">
+              <MappingFragment StoreEntitySet="status_order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesMaterials">
+            <EntityTypeMapping TypeName="sql11508062Model.TypeMaterial">
+              <MappingFragment StoreEntitySet="types_materials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdUnitMeasure" ColumnName="IdUnitMeasure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesProducts">
+            <EntityTypeMapping TypeName="sql11508062Model.TypeProduct">
+              <MappingFragment StoreEntitySet="types_products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitsMeasures">
+            <EntityTypeMapping TypeName="sql11508062Model.UnitMeasure">
+              <MappingFragment StoreEntitySet="units_measures">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+                <ScalarProperty Name="FullTitle" ColumnName="FullTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeeklyCosts">
+            <EntityTypeMapping TypeName="sql11508062Model.WeeklyCost">
+              <MappingFragment StoreEntitySet="weekly_costs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdFixedCost" ColumnName="IdFixedCost" />
+                <ScalarProperty Name="DayAccrual" ColumnName="DayAccrual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WriteOffMaterials">
+            <EntityTypeMapping TypeName="sql11508062Model.WriteOffMaterial">
+              <MappingFragment StoreEntitySet="write_off_materials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="QuantityUnits" ColumnName="QuantityUnits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="sql11508062Model.Equipment">
+              <MappingFragment StoreEntitySet="equipments">
+                <ScalarProperty Name="AmortizationSumInMonth" ColumnName="AmortizationSumInMonth" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="YearsWork" ColumnName="YearsWork" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

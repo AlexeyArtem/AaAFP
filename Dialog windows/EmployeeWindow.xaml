@@ -1,0 +1,110 @@
+﻿<mah:MetroWindow  
+        x:Class="AaAFP2.EmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="сотрудника" Style="{StaticResource DialogWindowStyle}" WindowStartupLocation="CenterScreen">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.DataContext>
+        <local:EmployeeViewModel></local:EmployeeViewModel>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+            <Label>Фамилия:</Label>
+            <TextBox x:Name="tbSurname">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.Surname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10">
+            <Label>Имя:</Label>
+            <TextBox x:Name="tbName">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <Label>Отчество:</Label>
+            <TextBox x:Name="tbPatronymic">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.Patronymic" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+            <Label>Зарплата:</Label>
+            <xctk:DecimalUpDown x:Name="udSalary" Minimum="1" Value="{Binding CurrentDbEntity.SumSalary, Mode=TwoWay}" Style="{StaticResource DialogInputControlStyle}"></xctk:DecimalUpDown>
+        </StackPanel>
+        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Должности" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0">
+                    <StackPanel Margin="0">
+                        <Label>Должность:</Label>
+                        <local:DataTablePicker TitleWindow="Таблица должностей" IdRow="{Binding CurrentIdPosition, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Positions.Local}"></local:DataTablePicker>
+                    </StackPanel>
+                    <Button Content="Добавить" Style="{StaticResource DialogWindowButtonStyle}" Command="{Binding AddPositionCommand}"></Button>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0">
+                    <ListBox x:Name="listPositions" ItemsSource="{Binding Path=Positions}" Height="58">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=positions.Title}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Command="{Binding RemovePositionCommand}" Style="{StaticResource DialogWindowButtonStyle}" CommandParameter="{Binding ElementName=listPositions, Path=SelectedItem}" >Удалить</Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Width="Auto" Margin="10, 5, 10, 10" Style="{StaticResource AddOrUpdateButtonStyle}">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                    <Binding ElementName="tbName" Path="Text.Length"/>
+                    <Binding ElementName="tbSurname" Path="Text.Length"/>
+                    <Binding ElementName="tbPatronymic" Path="Text.Length"/>
+                    <Binding ElementName="udSalary" Path="Text.Length"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+    </Grid>
+</mah:MetroWindow>

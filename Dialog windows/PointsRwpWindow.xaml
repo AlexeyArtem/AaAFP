@@ -1,0 +1,56 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="AaAFP2.PointsRwpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Title="баллы КТУ" Style="{StaticResource DialogWindowStyle}" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:DbEntityViewModel>
+            <local:DbEntityViewModel.CurrentDbEntity>
+                <local:AccrualPointsRwp></local:AccrualPointsRwp>
+            </local:DbEntityViewModel.CurrentDbEntity>
+        </local:DbEntityViewModel>
+    </Window.DataContext>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <StackPanel Orientation="Vertical">
+        <StackPanel>
+            <Label>Сотрудник:</Label>
+            <local:DataTablePicker TitleWindow="Таблица сотрудников" IdRow="{Binding CurrentDbEntity.IdEmployee, Mode=TwoWay}" ItemsSource="{Binding DbEntities.Employees.Local}"></local:DataTablePicker>
+        </StackPanel>
+        <StackPanel>
+            <Label>Дата:</Label>
+            <DatePicker x:Name="date">
+                <DatePicker.SelectedDate>
+                    <Binding Path="CurrentDbEntity.Date" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule TextError="Поле должно быть заполнено. Введите дату"></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+        </StackPanel>
+        <StackPanel>
+            <Label>Баллы КТУ:</Label>
+            <xctk:IntegerUpDown x:Name="udPoints" Minimum="0" Style="{StaticResource DialogInputControlStyle}" Value="{Binding  CurrentDbEntity.Sum, Mode=TwoWay}"></xctk:IntegerUpDown>
+        </StackPanel>
+        <StackPanel>
+            <Button Style="{StaticResource AddOrUpdateButtonStyle}">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                        <Binding ElementName="date" Path="Text.Length"/>
+                        <Binding ElementName="udPoints" Path="Text.Length"/>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</mah:MetroWindow>

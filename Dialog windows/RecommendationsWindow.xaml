@@ -1,0 +1,125 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="AaAFP2.RecommendationsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Title="Рекомендации" Height="450" Width="920" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.DataContext>
+        <local:RecomendationViewModel></local:RecomendationViewModel>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <local:SbyteInBoolConverter x:Key="SbyteInBoolConverter"></local:SbyteInBoolConverter>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource MahApps.Styles.GroupBox}">
+            <Setter Property="Margin" Value="4"></Setter>
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource MahApps.Styles.CheckBox}">
+            <Setter Property="Margin" Value="0,7,0,0"></Setter>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        </Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource MahApps.Styles.TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.3*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.35*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="1.7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Header="Список рекоммендаций">
+            <DataGrid Margin="2" ItemsSource="{Binding Path=DbEntities.Recommendations.Local}" SelectedIndex="0" SelectedItem="{Binding Path=CurrentDbEntity, Mode=OneWayToSource}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Описание ситуации" Binding="{Binding Path=StateDescription}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Рекомендация" Binding="{Binding Path=RecommendationText}"></DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Удалить" Command="{Binding Path=RemoveDbEntityCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Условия">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="6*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center">Финансовые условия:</Label>
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+                    <CheckBox Margin="0" IsChecked="{Binding Path=CurrentDbEntity.conditions_finace.IsPredictedProfitNegative, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Отрицательная планируемая прибыль?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_finace.IsWorkingCapitalNotEnough, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Нехватка оборотного капитала?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_finace.IsWorkingCapitalEnoughSalary, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Оборотных средств хватает на выплату ЗП?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_finace.IsWokingCapitalEnoughMaterial, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Оборотных средств хватает на требуемые материалы?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_finace.IsWorkingCapitalEnoughFixedCosts, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Оборотных средств хватает на регулярные расходы?</TextBlock>
+                    </CheckBox>
+                </StackPanel>
+                <Label FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">Условия предприятия:</Label>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <CheckBox Margin="0" IsChecked="{Binding Path=CurrentDbEntity.conditions_orders_and_employees.HasEmployeesManyPosition, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Есть сотрудники занимающие несколько должностей?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_orders_and_employees.HasIncompleteOrdersProductionTimeViolations, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Есть назавершенные заказы с нарушенными сроками?</TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Path=CurrentDbEntity.conditions_orders_and_employees.HasCompletedOrdersUnpaid, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Есть завершенные заказы с недоплатами?</TextBlock>
+                    </CheckBox>
+                </StackPanel>
+
+                <Label FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Условия производства:</Label>
+                <StackPanel Grid.Row="1" Grid.Column="2">
+                    <CheckBox Margin="0" IsChecked="{Binding Path=CurrentDbEntity.conditions_manufacturing.ProductsProductionExceedsPredicted, Mode=TwoWay, Converter={StaticResource SbyteInBoolConverter}}">
+                        <TextBlock>Количество текущих изделий превышает прогнозируемое количество?</TextBlock>
+                    </CheckBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Информация">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <Label HorizontalAlignment="Left">Описание ситуации:</Label>
+                    <TextBox VerticalScrollBarVisibility="Auto" Text="{Binding Path=CurrentDbEntity.StateDescription, Mode=TwoWay}" Margin="5,0,10.4,0" Height="41"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <Label HorizontalAlignment="Left">Рекомендация:</Label>
+                    <TextBox VerticalScrollBarVisibility="Auto" Text="{Binding Path=CurrentDbEntity.RecommendationText, Mode=TwoWay}" Height="41" Margin="5,0,4.6,0"></TextBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Column="0" Grid.Row="2" Margin="4, 0, 4, 4" Command="{Binding Path=OpenAddRecommendationDialog}">Добавить новую рекомендацию</Button>
+        <Button Grid.Column="1" Grid.Row="2" Margin="4, 0, 4, 4" Command="{Binding SaveChangesInDbCommand}">Сохранить изменения</Button>
+    </Grid>
+</mah:MetroWindow>

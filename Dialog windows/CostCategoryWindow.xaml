@@ -1,0 +1,67 @@
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                  x:Class="AaAFP2.CostCategoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AaAFP2" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                  mc:Ignorable="d"
+        Title="Категории расходов" WindowStartupLocation="CenterScreen" Width="330" Height="300" ResizeMode="CanMinimize">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding UndoChangesCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.DataContext>
+        <local:DbEntityViewModel>
+            <local:DbEntityViewModel.CurrentDbEntity>
+                <local:CostCategory></local:CostCategory>
+            </local:DbEntityViewModel.CurrentDbEntity>
+        </local:DbEntityViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="1.3*"></RowDefinition>
+            <RowDefinition Height="0.4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="5, 0, 5, 0" VerticalAlignment="Center">
+            <Label>Название:</Label>
+            <TextBox x:Name="tbName" Width="auto" Style="{StaticResource MahApps.Styles.TextBox}">
+                <TextBox.Text>
+                    <Binding Path="CurrentDbEntity.Name" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:RequiredFieldValidationRule></local:RequiredFieldValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <Button Width="auto" Margin="5, 26, 5, 0" VerticalAlignment="Center" Style="{StaticResource ResourceKey=DialogWindowButtonStyle}" Command="{Binding AddCopyCurrentDbEntityCommand}" Content="Добавить" Grid.Column="1" Grid.Row="0" Height="28">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource IntToBoolMultiConverter}">
+                    <Binding ElementName="tbName" Path="Text.Length"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+        <ListBox Grid.Row="1" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding DbEntities.CostCategories.Local}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBox FontSize="14" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalAlignment="Center"></TextBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" Command="{Binding Path=RemoveDbEntityCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <Button x:Name="btnSave" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" Width="auto" Style="{StaticResource SaveChangesButtonStyle}"></Button>
+    </Grid>
+</mah:MetroWindow>
