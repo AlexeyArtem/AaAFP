@@ -53,23 +53,30 @@ namespace AaAFP2
 
         public void RefreshReport(object parameter) 
         {
-            switch (CurrentTypeReport) 
+            try
             {
-                case TypeReport.OnClients:
-                    CurrentReport = reportsModel.GetReportOnClients(DateStart, DateEnd).DefaultView;
-                    break;
-                case TypeReport.OnEmployees:
-                    CurrentReport = reportsModel.GetReportOnEmployees(DateStart, DateEnd).DefaultView;
-                    break;
-                case TypeReport.OnFinance:
-                    CurrentReport = reportsModel.GetReportOnFinance(DateStart, DateEnd).DefaultView;
-                    break;
-                case TypeReport.OnOrders:
-                    CurrentReport = reportsModel.GetReportOnOrders(DateStart, DateEnd).DefaultView;
-                    break;
-                case TypeReport.OnSalaries:
-                    CurrentReport = reportsModel.GetSalaryReport().DefaultView;
-                    break;
+                switch (CurrentTypeReport)
+                {
+                    case TypeReport.OnClients:
+                        CurrentReport = reportsModel.GetReportOnClients(DateStart, DateEnd).DefaultView;
+                        break;
+                    case TypeReport.OnEmployees:
+                        CurrentReport = reportsModel.GetReportOnEmployees(DateStart, DateEnd).DefaultView;
+                        break;
+                    case TypeReport.OnFinance:
+                        CurrentReport = reportsModel.GetReportOnFinance(DateStart, DateEnd).DefaultView;
+                        break;
+                    case TypeReport.OnOrders:
+                        CurrentReport = reportsModel.GetReportOnOrders(DateStart, DateEnd).DefaultView;
+                        break;
+                    case TypeReport.OnSalaries:
+                        CurrentReport = reportsModel.GetSalaryReport().DefaultView;
+                        break;
+                }
+            }
+            catch(Exception ex) 
+            {
+                FastMessageBox.ShowError("При построении отчета возникла ошибка. Подробности: " + ex.Message);
             }
         }
     }
