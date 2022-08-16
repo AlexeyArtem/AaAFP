@@ -132,34 +132,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AccrualPointsRwp.cs">
+    <Compile Include="Classes\Data base\AccrualPointsRwp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="BonusSalary.cs">
+    <Compile Include="Classes\Data base\BonusSalary.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs">
+    <Compile Include="Classes\Data base\Client.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ConditionFinance.cs">
+    <Compile Include="Classes\Data base\ConditionFinance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ConditionManufacturing.cs">
+    <Compile Include="Classes\Data base\ConditionManufacturing.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ConditionOrdersAndEmployees.cs">
+    <Compile Include="Classes\Data base\ConditionOrdersAndEmployees.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contract.cs">
+    <Compile Include="Classes\Data base\Contract.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ContractPayment.cs">
+    <Compile Include="Classes\Data base\ContractPayment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="CostCategory.cs">
+    <Compile Include="Classes\Data base\CostCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DeductionFromSalary.cs">
+    <Compile Include="Classes\Data base\DeductionFromSalary.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Dialog windows\AddRecommendationWindow.xaml.cs">
@@ -192,108 +192,108 @@
     <Compile Include="Classes\DialogWindowFactory.cs" />
     <Compile Include="Classes\DialogWindowModule.cs" />
     <Compile Include="Classes\Data base\BaseDbEntities.cs" />
-    <Compile Include="Employee.cs">
+    <Compile Include="Classes\Data base\Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmployeePosition.cs">
+    <Compile Include="Classes\Data base\EmployeePosition.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="EnterpriseInfo.cs">
+    <Compile Include="Classes\Data base\EnterpriseInfo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Equipment.cs">
+    <Compile Include="Classes\Data base\Equipment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Dialog windows\EquipmentsWindow.xaml.cs">
       <DependentUpon>EquipmentsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FixedCost.cs">
+    <Compile Include="Classes\Data base\FixedCost.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\IDialogWindowFactory.cs" />
     <Compile Include="Classes\Converters\IndexInDayConverter.cs" />
     <Compile Include="Classes\Converters\IntToBoolMultiConverter.cs" />
     <Compile Include="Classes\Data base\LocalDbEntities.cs" />
-    <Compile Include="ManufacturingOperation.cs">
+    <Compile Include="Classes\Data base\ManufacturingOperation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Material.cs">
+    <Compile Include="Classes\Data base\Material.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="Classes\Data base\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs">
+    <Compile Include="Classes\Data base\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Designer.cs">
+    <Compile Include="Classes\Data base\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Classes\ModelsModule.cs" />
     <Compile Include="Classes\Model\TypeTimePeriod.cs" />
-    <Compile Include="MonthlyCost.cs">
+    <Compile Include="Classes\Data base\MonthlyCost.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OperationProduct.cs">
+    <Compile Include="Classes\Data base\OperationProduct.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Order.cs">
+    <Compile Include="Classes\Data base\Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OtherCost.cs">
+    <Compile Include="Classes\Data base\OtherCost.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OtherRevenue.cs">
+    <Compile Include="Classes\Data base\OtherRevenue.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackingList.cs">
+    <Compile Include="Classes\Data base\PackingList.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PaymentFixedCost.cs">
+    <Compile Include="Classes\Data base\PaymentFixedCost.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PaymentSalaryPrepay.cs">
+    <Compile Include="Classes\Data base\PaymentSalaryPrepay.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Position.cs">
+    <Compile Include="Classes\Data base\Position.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs">
+    <Compile Include="Classes\Data base\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductMaterial.cs">
+    <Compile Include="Classes\Data base\ProductMaterial.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Recommendation.cs">
+    <Compile Include="Classes\Data base\Recommendation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="RecordPackingList.cs">
+    <Compile Include="Classes\Data base\RecordPackingList.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\RequiredFieldValidationRule.cs" />
-    <Compile Include="SalaryPayment.cs">
+    <Compile Include="Classes\Data base\SalaryPayment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\View model\SettingsViewModel.cs" />
     <Compile Include="Resources\SplashScreenWindow.xaml.cs">
       <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatusOrder.cs">
+    <Compile Include="Classes\Data base\StatusOrder.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TypeMaterial.cs">
+    <Compile Include="Classes\Data base\TypeMaterial.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TypeProduct.cs">
+    <Compile Include="Classes\Data base\TypeProduct.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="UnitMeasure.cs">
+    <Compile Include="Classes\Data base\UnitMeasure.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\View model\RecomendationViewModel.cs" />
@@ -353,10 +353,10 @@
     <Compile Include="Dialog windows\PointsRwpWindow.xaml.cs">
       <DependentUpon>PointsRwpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WeeklyCost.cs">
+    <Compile Include="Classes\Data base\WeeklyCost.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="WriteOffMaterial.cs">
+    <Compile Include="Classes\Data base\WriteOffMaterial.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Page Include="Dialog windows\AddRecommendationWindow.xaml">
@@ -524,11 +524,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model1.edmx">
+    <EntityDeploy Include="Classes\Data base\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
+    <None Include="Classes\Data base\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="Diagrams\ModelDiagram.cd" />
@@ -563,12 +563,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model1.Context.tt">
+    <Content Include="Classes\Data base\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model1.tt">
+    <Content Include="Classes\Data base\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>

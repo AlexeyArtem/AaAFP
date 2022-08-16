@@ -32,37 +32,29 @@ namespace AaAFP2
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
-            DbEntities.Load();
-            MainWindow mainWindow = new MainWindow();
+            try
+            {
+                DbEntities.Load();
+                MainWindow mainWindow = new MainWindow();
 
-            thread.Abort();
-            mainWindow.Show();
-            mainWindow.Activate();
-            FastMessageBox.ShowInformation("Данная версия программы является ознакомительной. Все внесенные изменения сохраняются только в рамках текущего сеанса. После перезапуска программы все изменения буду удалены.");
-
-            //try
-            //{
-            //    DbEntities.Load();
-            //    MainWindow mainWindow = new MainWindow();
-
-            //    thread.Abort();
-            //    mainWindow.Show();
-            //    mainWindow.Activate();
-            //    FastMessageBox.ShowInformation("Данная версия программы является ознакомительной. Все внесенные изменения сохраняются только в рамках текущего сеанса. После перезапуска программы все изменения буду удалены.");
-            //}
-            //catch (Exception ex)
-            //{
-            //    thread.Abort();
-            //    if (ex is MySqlException || ex is EntityException)
-            //    {
-            //        FastMessageBox.ShowError("При соединении с сервером возникла ошибка. Проверьте соединение с интернетом и повторите попытку.");
-            //    }
-            //    else 
-            //    {
-            //        FastMessageBox.ShowError("При запуске программы возникла неизвестная ошибка. Подробности: " + ex.Message);
-            //    }
-            //    this.Shutdown();
-            //}
+                thread.Abort();
+                mainWindow.Show();
+                mainWindow.Activate();
+                FastMessageBox.ShowInformation("Данная версия программы является ознакомительной. Все внесенные изменения сохраняются только в рамках текущего сеанса. После перезапуска программы все изменения буду удалены.");
+            }
+            catch (Exception ex)
+            {
+                thread.Abort();
+                if (ex is MySqlException || ex is EntityException)
+                {
+                    FastMessageBox.ShowError("При соединении с сервером возникла ошибка. В работе сервера возможны перебои. Проверьте соединение с интернетом и повторите попытку.");
+                }
+                else
+                {
+                    FastMessageBox.ShowError("При запуске программы возникла неизвестная ошибка. Подробности: " + ex.Message);
+                }
+                Shutdown();
+            }
         }
 
         private void LoadSplashScreen() 
