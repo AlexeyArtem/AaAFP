@@ -3,7 +3,7 @@
 
 AaAFP - a program for accounting various information of a furniture enterprise and an expert system for analyzing the state of the enterprise and providing recommendations.
 
-The application is implemented on the NET Framework using WPF. The architecture of the code is built according to the MVVM pattern. MySQL is used as a DBMS. The ORM Entity Framework is used to communicate with the database.
+The application is implemented on the NET Framework using WPF. The architecture of the code is built according to the MVVM pattern. MySQL is used as a DBMS. The ORM Entity Framework is used to communicate with the database. The expert system is implemented using a production model of knowledge representation.
 
 ## Allows:
 - Providing recommendations to support management decision-making based on the current state of the enterprise
