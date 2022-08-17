@@ -45,9 +45,14 @@ namespace AaAFP2
             catch (Exception ex)
             {
                 thread.Abort();
+
                 if (ex is MySqlException || ex is EntityException)
                 {
                     FastMessageBox.ShowError("При соединении с сервером возникла ошибка. В работе сервера возможны перебои. Проверьте соединение с интернетом и повторите попытку.");
+                }
+                else if (ex.Message.Contains("MySql.Data.MySqlClient"))
+                {
+                    FastMessageBox.ShowError("При запуске программы возникла ошибка. Для работы программы необходимо установить MySQL Connector/NET версии 6.10.7.");
                 }
                 else
                 {
